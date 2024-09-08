@@ -46,4 +46,15 @@ int main()
     testStack.push("working");
 
     testStack.display();
+
+    // Queue testing
+    Queue testQueue;
+    testQueue.enqueue("Hopefully");
+    testQueue.enqueue("this");
+    testQueue.enqueue("ends");
+    testQueue.enqueue("up");
+    testQueue.enqueue("working");
+
+    testQueue.display();
+
 }
