@@ -1,13 +1,16 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "Node.h"
+#include "Stack.h"
+#include "Queue.h"
 
 using namespace std;
 
-int main() {
+int main() 
+{
     // Variable declaration
     vector<string> magicItems;
-
     string line;
     
     // File IO
@@ -30,7 +33,11 @@ int main() {
     // Close file
     file.close();
 
-    // Print array
+    // Print vector (ArrayList)
     cout << magicItems[51] << endl;
-    cout << magicItems.size() << endl;
+
+    // Node testing
+    Node* head = new Node("Hello");
+
+    cout << head -> data << endl;
 }
