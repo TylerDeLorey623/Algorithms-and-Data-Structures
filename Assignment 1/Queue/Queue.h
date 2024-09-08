@@ -10,8 +10,8 @@ using namespace std;
 class Queue 
 {
     public:
-        Node* head;
-        Node* tail;
+        Node* head = nullptr;
+        Node* tail = nullptr;
 
         // Enqueue declaration
         void enqueue(string item);
@@ -22,6 +22,8 @@ class Queue
         // isEmpty declaration
         bool isEmpty();
 
+        // Temporary display function
+        void display();
 };
 
 #endif

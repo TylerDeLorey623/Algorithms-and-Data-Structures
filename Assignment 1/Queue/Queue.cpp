@@ -34,5 +34,17 @@ string Queue::dequeue()
 // isEmpty
 bool Queue::isEmpty()
 {
-    return (head == NULL);
+    return (head == nullptr);
+}
+
+// Display
+void Queue::display()
+{
+    Node* curr = head;
+    while (curr != NULL)
+    {
+        cout << curr->data + " ";
+        curr = curr->next;
+    }
+    cout << endl;
 }
