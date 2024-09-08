@@ -1,5 +1,8 @@
+#ifndef STACK_H
+#define STACK_H
+
 #include <iostream>
-#include "Node.h"
+#include "../Node/Node.h"
 
 using namespace std;
 
@@ -7,7 +10,7 @@ using namespace std;
 class Stack 
 {
     public:
-        Node* myHead = nullptr;
+        Node* head;
 
         // Push declaration
         void push(string item);
@@ -18,4 +21,9 @@ class Stack
         // isEmpty declaration
         bool isEmpty();
 
+        // Temporary display function
+        void display();
+
 };
+
+#endif

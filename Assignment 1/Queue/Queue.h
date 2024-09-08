@@ -1,5 +1,8 @@
+#ifndef QUEUE_H
+#define QUEUE_H
+
 #include <iostream>
-#include "Node.h"
+#include "../Node/Node.h"
 
 using namespace std;
 
@@ -7,8 +10,8 @@ using namespace std;
 class Queue 
 {
     public:
-        Node* head = nullptr;
-        Node* tail = nullptr;
+        Node* head;
+        Node* tail;
 
         // Enqueue declaration
         void enqueue(string item);
@@ -20,3 +23,5 @@ class Queue
         bool isEmpty();
 
 };
+
+#endif

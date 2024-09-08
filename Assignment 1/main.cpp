@@ -1,9 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "Node.h"
-#include "Stack.h"
-#include "Queue.h"
+
+#include "./Node/Node.h"
+#include "./Stack/Stack.h"
+#include "./Queue/Queue.h"
 
 using namespace std;
 
@@ -34,10 +35,15 @@ int main()
     file.close();
 
     // Print vector (ArrayList)
-    cout << magicItems[51] << endl;
+    cout << magicItems[0] << endl;
 
-    // Node testing
-    Node* head = new Node("Hello");
+    // Stack testing
+    Stack testStack;
+    testStack.push("Hopefully");
+    testStack.push("this");
+    testStack.push("ends");
+    testStack.push("up");
+    testStack.push("working");
 
-    cout << head -> data << endl;
+    testStack.display();
 }

@@ -1,3 +1,7 @@
+// Prevents multiple inclusions of same header file
+#ifndef NODE_H
+#define NODE_H
+
 #include <iostream>
 
 using namespace std;
@@ -12,8 +16,11 @@ class Node
         // Pointer that points to the next node
         Node* next;
 
-        // Declares constructor (defined in Node.cpp)
+        // Declares empty constructor (defined in Node.cpp)
+        Node();
+
+        // Declares parameterized constructor (defined in Node.cpp)
         Node(string value);
 };
 
-
+#endif
