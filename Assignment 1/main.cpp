@@ -45,15 +45,48 @@ int main()
     testStack.push("up");
     testStack.push("working");
 
+    // Pop testing
+    for (int i = 0; i < 10; i++)
+    {
+        string result = testStack.pop();
+
+        if (result.empty())
+        {
+            cout << "Couldn't pop" << endl;
+        }
+        else
+        {
+            cout << result << endl;
+        }
+    }
+
+    // isEmpty testing
+    cout << testStack.isEmpty() << endl;
+
+    testStack.push("Hello");
+    testStack.push("world");
+
+    cout << testStack.isEmpty() << endl;
+
     testStack.display();
 
     // Queue testing
     Queue testQueue;
+
+    cout << testQueue.isEmpty() << endl;
+
     testQueue.enqueue("Hopefully");
     testQueue.enqueue("this");
     testQueue.enqueue("ends");
     testQueue.enqueue("up");
     testQueue.enqueue("working");
+    string result = testQueue.dequeue();
+
+    // Head and tail pointer testing
+    cout << "Head: " + testQueue.head->data << endl;
+    cout << "Tail: " + testQueue.tail->data << endl;
+
+    cout << testQueue.isEmpty() << endl;
 
     testQueue.display();
 

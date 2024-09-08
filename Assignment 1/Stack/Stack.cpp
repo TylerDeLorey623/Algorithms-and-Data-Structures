@@ -12,7 +12,7 @@ void Stack::push(string item)
 // Pop O(1)
 string Stack::pop()
 {
-    string poppedItem = NULL;
+    string poppedItem;
 
     if (!isEmpty())
     {

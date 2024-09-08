@@ -20,7 +20,7 @@ void Queue::enqueue(string item)
 // Pop O(1)
 string Queue::dequeue()
 {
-    string dequeuedItem = NULL;
+    string dequeuedItem;
 
     if (!isEmpty())
     {
