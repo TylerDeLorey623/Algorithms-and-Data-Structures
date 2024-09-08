@@ -25,7 +25,7 @@ string Stack::pop()
 // isEmpty O(1)
 bool Stack::isEmpty()
 {
-    return (head == NULL);
+    return (head == nullptr);
 }
 
 // Display

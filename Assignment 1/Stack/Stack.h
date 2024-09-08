@@ -10,7 +10,7 @@ using namespace std;
 class Stack 
 {
     public:
-        Node* head;
+        Node* head = nullptr;
 
         // Push declaration
         void push(string item);
