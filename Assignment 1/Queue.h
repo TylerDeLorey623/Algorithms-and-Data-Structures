@@ -28,6 +28,7 @@ class Queue
             }
 
             tail = newNode;
+            return;
         }
 
         // Dequeue O(1)
@@ -37,7 +38,11 @@ class Queue
             if (!isEmpty())
             {
                 dequeuedItem = head->data;
+                Node *temp = head;
                 head = head->next;
+
+                // Free memory when dequeuing the Node
+                delete(temp);
             }
 
             return dequeuedItem;

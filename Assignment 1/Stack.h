@@ -29,7 +29,11 @@ class Stack
             if (!isEmpty())
             {
                 poppedItem = top->data;
+                Node *temp = top;
                 top = top->next;
+
+                // Free memory when dequeuing the Node
+                delete(temp);
             }
             return poppedItem;
         }
