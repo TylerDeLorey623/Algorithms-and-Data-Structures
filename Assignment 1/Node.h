@@ -17,10 +17,18 @@ class Node
         Node* next;
 
         // Declares empty constructor (defined in Node.cpp)
-        Node();
+        Node()
+        {
+            this->data = "";
+            this->next = nullptr;
+        }
 
         // Declares parameterized constructor (defined in Node.cpp)
-        Node(string value);
+        Node(string value)
+        {
+            this->data = value;
+            this->next = nullptr;
+        }
 };
 
 #endif

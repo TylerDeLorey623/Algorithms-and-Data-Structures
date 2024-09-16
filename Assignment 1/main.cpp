@@ -2,9 +2,9 @@
 #include <fstream>
 #include <vector>
 
-#include "./Node/Node.h"
-#include "./Stack/Stack.h"
-#include "./Queue/Queue.h"
+#include "./Node.h"
+#include "./Stack.h"
+#include "./Queue.h"
 
 using namespace std;
 
