@@ -2,9 +2,7 @@
 #include <fstream>
 #include <vector>
 
-#include "./Node.h"
-#include "./Stack.h"
-#include "./Queue.h"
+#include "./isPalindrome.h"
 
 using namespace std;
 
@@ -13,6 +11,9 @@ int main()
     // Variable declaration
     vector<string> magicItems;
     string line;
+
+    string word;
+    char letter;
     
     // File IO
     ifstream file;
@@ -25,7 +26,7 @@ int main()
         return 1;
     }
 
-    // Read from file
+    // Read each line from file and put it into the magicItems vector (ArrayList)
     for (int i = 0; getline(file, line); i++)
     {
         magicItems.push_back(line);
@@ -34,60 +35,14 @@ int main()
     // Close file
     file.close();
 
-    // Print vector (ArrayList)
-    cout << magicItems[0] << endl;
-
-    // Stack testing
-    Stack testStack;
-    testStack.push("Hopefully");
-    testStack.push("this");
-    testStack.push("ends");
-    testStack.push("up");
-    testStack.push("working");
-
-    // Pop testing
-    for (int i = 0; i < 10; i++)
+    // Checking for palindromes in the magic items array
+    for (int i = 0, arraySize = magicItems.size(); i < arraySize; i++)
     {
-        string result = testStack.pop();
-
-        if (result.empty())
+        word = magicItems[i];
+        
+        if (isPalindrome(word))
         {
-            cout << "Couldn't pop" << endl;
-        }
-        else
-        {
-            cout << result << endl;
+            cout << word << endl;
         }
     }
-
-    // isEmpty testing
-    cout << testStack.isEmpty() << endl;
-
-    testStack.push("Hello");
-    testStack.push("world");
-
-    cout << testStack.isEmpty() << endl;
-
-    testStack.display();
-
-    // Queue testing
-    Queue testQueue;
-
-    cout << testQueue.isEmpty() << endl;
-
-    testQueue.enqueue("Hopefully");
-    testQueue.enqueue("this");
-    testQueue.enqueue("ends");
-    testQueue.enqueue("up");
-    testQueue.enqueue("working");
-    string result = testQueue.dequeue();
-
-    // Head and tail pointer testing
-    cout << "Head: " + testQueue.head->data << endl;
-    cout << "Tail: " + testQueue.tail->data << endl;
-
-    cout << testQueue.isEmpty() << endl;
-
-    testQueue.display();
-
 }
