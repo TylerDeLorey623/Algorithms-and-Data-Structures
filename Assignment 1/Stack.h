@@ -13,7 +13,7 @@ class Stack
         Node* top = nullptr;
 
         // Push O(1)
-        void push(string item)
+        void push(char item)
         {
             Node* newNode = new Node(item);
             newNode->next = top;
@@ -22,9 +22,9 @@ class Stack
         }
 
         // Pop O(1)
-        string pop()
+        char pop()
         {
-            string poppedItem;
+            char poppedItem;
 
             if (!isEmpty())
             {
@@ -32,7 +32,7 @@ class Stack
                 Node *temp = top;
                 top = top->next;
 
-                // Free memory when dequeuing the Node
+                // Free memory when popping the Stack
                 delete(temp);
             }
             return poppedItem;

@@ -11,7 +11,7 @@ class Node
 {
     public:
         // Holds the item name for this node
-        string data;
+        char data;
 
         // Pointer that points to the next node
         Node* next;
@@ -19,12 +19,12 @@ class Node
         // Declares empty constructor (defined in Node.cpp)
         Node()
         {
-            this->data = "";
+            this->data = NULL;
             this->next = nullptr;
         }
 
         // Declares parameterized constructor (defined in Node.cpp)
-        Node(string value)
+        Node(char value)
         {
             this->data = value;
             this->next = nullptr;

@@ -14,7 +14,7 @@ class Queue
         Node* tail = nullptr;
 
         // Enqueue O(1)
-        void enqueue(string item)
+        void enqueue(char item)
         {
             Node* newNode = new Node(item);
 
@@ -32,9 +32,9 @@ class Queue
         }
 
         // Dequeue O(1)
-        string dequeue()
+        char dequeue()
         {
-            string dequeuedItem;
+            char dequeuedItem;
             if (!isEmpty())
             {
                 dequeuedItem = head->data;
