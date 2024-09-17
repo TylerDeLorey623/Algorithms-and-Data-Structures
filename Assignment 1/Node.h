@@ -16,13 +16,6 @@ class Node
         // Pointer that points to the next node
         Node* next;
 
-        // Declares empty constructor (defined in Node.cpp)
-        Node()
-        {
-            this->data = NULL;
-            this->next = nullptr;
-        }
-
         // Declares parameterized constructor (defined in Node.cpp)
         Node(char value)
         {
