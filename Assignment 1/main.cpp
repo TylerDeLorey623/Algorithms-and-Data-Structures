@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "./isPalindrome.h"
+#include "./Sorts.h"
 
 using namespace std;
 
@@ -13,7 +14,8 @@ int main()
     string line;
 
     string word;
-    char letter;
+
+    int comparisonNum = 0;
     
     // File IO
     ifstream file;
@@ -36,6 +38,7 @@ int main()
     file.close();
 
     // Checking for palindromes in the magic items array
+    cout << "PALINDROMES:" << endl;
     for (int i = 0, arraySize = magicItems.size(); i < arraySize; i++)
     {
         word = magicItems[i];
@@ -45,4 +48,21 @@ int main()
             cout << word << endl;
         }
     }
+    cout << "" << endl;
+
+    // Performs Selection Sort O(n^2)
+    comparisonNum = selectionSort(magicItems);
+    cout << "Number of Comparisons doing Selection Sort: " << comparisonNum << endl;
+
+    // Shuffles magic items
+    shuffle(magicItems);
+
+    // Performs Insertion Sort O(n^2)
+    comparisonNum = insertionSort(magicItems);
+    cout << "Number of Comparisons doing Insertion Sort: " << comparisonNum << endl;
+
+    // Shuffles magic items
+    shuffle(magicItems);
+
+
 }
