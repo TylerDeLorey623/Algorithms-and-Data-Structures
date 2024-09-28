@@ -14,7 +14,7 @@ TARGET_DEL = main.exe
 SRCS = main.cpp
 
 # Header files
-HEADERS = Node.h Queue.h Stack.h isPalindrome.h
+HEADERS = Node.h Queue.h Stack.h isPalindrome.h Sorts.h
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
