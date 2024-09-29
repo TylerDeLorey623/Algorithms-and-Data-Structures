@@ -35,5 +35,10 @@ run: $(TARGET)
 	./$(TARGET)
 
 # Clean rule to remove generated files
+# Uses del if on windows, uses rm on Unix-like systems
 clean:
+ifeq ($(OS),Windows_NT)
 	del $(TARGET_DEL) $(OBJS)
+else
+	rm $(TARGET_DEL) $(OBJS)
+endif
