@@ -87,7 +87,7 @@ int insertionSort(vector<string> &myItems)
         {
             comparisonNum++;
 
-            // Shift element to the right
+            // Shift element to the right if not correct position
             myItems[end + 1] = myItems[end];
             end--;
         }
@@ -100,5 +100,84 @@ int insertionSort(vector<string> &myItems)
 }
 
 
+int merge(vector <string> &myItems, vector<string> &left, vector<string> &right, int m)
+{
+    int comparisonNum = 0;
+
+    // Tracks both sides of the array
+    int lIndex = 0, rIndex = 0;
+    int lSize = left.size(), rSize = right.size();
+
+    // Size of merged array
+    int n = lSize + rSize;
+
+    vector<string> tempItems(n);
+
+    // Merges items into temp array
+    for (int k = 0; k < n; k++)
+    {
+        comparisonNum++;
+
+        // If right side has been completely traversed, copy remaining left half items into tempItems 
+        if (rIndex >= rSize)
+        {
+            tempItems[k] = left[lIndex];
+            lIndex++;
+        }
+        // If left side has been completely traversed, copy remaining right half items into tempItems 
+        else if (lIndex >= lSize)
+        {
+            tempItems[k] = right[rIndex];
+            rIndex++;
+        }
+        // If current element in left half is less than current element in right half, copy left element into tempItems
+        else if (left[lIndex] < right[rIndex])
+        {
+            tempItems[k] = left[lIndex];
+            lIndex++;
+        }
+        // If current element in right half is less than or equal to current element in left half, copy right element into tempItems
+        else
+        {
+            tempItems[k] = right[rIndex];
+            rIndex++;
+        }
+    }
+
+    // Copies sorted tempItems to myItems
+    for (int k = 0; k < n; k++)
+    {
+        myItems[k] = tempItems[k];
+    }
+
+    return comparisonNum;
+}
+
+// Returns number of comparisons
+// Pass by reference (changes to myItems affects magicItems)
+int mergeSort(vector<string> &myItems)
+{
+    int comparisonNum = 0;
+    int size = myItems.size();
+
+    if (size <= 1)
+    {
+        return comparisonNum;
+    }
+
+    int mid = size / 2;
+
+    // Divides array into left and right sides
+    vector<string> leftArray(myItems.begin(), myItems.begin() + mid);
+    comparisonNum += mergeSort(leftArray);
+
+    vector<string> rightArray(myItems.begin() + mid, myItems.end());
+    comparisonNum += mergeSort(rightArray);
+
+    // Conquers each section
+    comparisonNum += merge(myItems, leftArray, rightArray, mid);
+
+    return comparisonNum;
+}
 
 #endif
