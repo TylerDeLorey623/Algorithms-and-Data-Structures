@@ -26,6 +26,7 @@
         "array": "cpp",
         "string_view": "cpp",
         "ranges": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "cmath": "cpp"
     }
 }
