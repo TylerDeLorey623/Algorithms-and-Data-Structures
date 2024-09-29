@@ -48,7 +48,7 @@ int main()
             cout << word << endl;
         }
     }
-    cout << "" << endl;
+    cout << endl;
 
     // Performs Selection Sort O(n^2)
     comparisonNum = selectionSort(magicItems);
@@ -64,5 +64,7 @@ int main()
     // Shuffles magic items
     shuffle(magicItems);
 
-
+    // Performs Merge Sort O(n * log(n))
+    comparisonNum = mergeSort(magicItems);
+    cout << "Number of Comparisons doing Merge Sort: " << comparisonNum << endl;
 }
