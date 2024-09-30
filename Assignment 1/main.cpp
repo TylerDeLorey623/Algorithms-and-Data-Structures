@@ -67,4 +67,11 @@ int main()
     // Performs Merge Sort O(n * log(n))
     comparisonNum = mergeSort(magicItems);
     cout << "Number of Comparisons doing Merge Sort: " << comparisonNum << endl;
+
+    // Shuffles magic items
+    shuffle(magicItems);
+
+    // Performs Quick Sort O(n * log(n))
+    comparisonNum = quickSort(magicItems);
+    cout << "Number of Comparisons doing Quick Sort: " << comparisonNum << endl;
 }
