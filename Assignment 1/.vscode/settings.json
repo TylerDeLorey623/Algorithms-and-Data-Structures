@@ -27,6 +27,8 @@
         "string_view": "cpp",
         "ranges": "cpp",
         "ostream": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "initializer_list": "cpp",
+        "limits": "cpp"
     }
 }
