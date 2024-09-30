@@ -8,7 +8,11 @@ CXXFLAGS = -Wall -g
 TARGET = main
 
 # For deleting the target
-TARGET_DEL = main.exe
+ifeq ($(OS),Windows_NT)
+	TARGET_DEL = main.exe
+else
+	TARGET_DEL = main.out
+endif
 
 # Source files
 SRCS = main.cpp
