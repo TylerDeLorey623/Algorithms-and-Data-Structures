@@ -12,6 +12,15 @@ class Stack
     public:
         Node* top = nullptr;
 
+        // Deconstructor for Stack
+        ~Stack()
+        {
+            while (!isEmpty())
+            {
+                pop();
+            }
+        }
+
         // Push O(1)
         void push(char item)
         {
@@ -24,17 +33,18 @@ class Stack
         // Pop O(1)
         char pop()
         {
-            char poppedItem;
-
-            if (!isEmpty())
+            if (isEmpty())
             {
-                poppedItem = top->data;
-                Node *temp = top;
-                top = top->next;
-
-                // Free memory when popping the Stack
-                delete(temp);
+                throw runtime_error("Attempted to pop empty stack");
             }
+
+            char poppedItem = top->data;
+            Node* temp = top;
+            top = top->next;
+
+            // Free memory when popping the Node from the Stack
+            delete(temp);
+
             return poppedItem;
         }
 
@@ -43,19 +53,6 @@ class Stack
         {
             return (top == nullptr);
         }
-
-        // Temp display O(n)
-        void display()
-        {
-            Node* curr = top;
-            while (curr != NULL)
-            {
-                cout << curr->data + " ";
-                curr = curr->next;
-            }
-            cout << endl;
-        }
-
 };
 
 #endif

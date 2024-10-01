@@ -13,6 +13,15 @@ class Queue
         Node* head = nullptr;
         Node* tail = nullptr;
 
+        // Deconstructor for Queue
+        ~Queue()
+        {
+            while (!isEmpty())
+            {
+                dequeue();
+            }
+        }
+
         // Enqueue O(1)
         void enqueue(char item)
         {
@@ -34,16 +43,17 @@ class Queue
         // Dequeue O(1)
         char dequeue()
         {
-            char dequeuedItem;
-            if (!isEmpty())
+            if (isEmpty())
             {
-                dequeuedItem = head->data;
-                Node *temp = head;
-                head = head->next;
-
-                // Free memory when dequeuing the Node
-                delete(temp);
+                throw runtime_error("Attempted to dequeue empty queue");
             }
+
+            char dequeuedItem = head->data;
+            Node* temp = head;
+            head = head->next;
+
+            // Free memory when dequeuing the Node from the Queue
+            delete(temp);
 
             return dequeuedItem;
         }
@@ -52,18 +62,6 @@ class Queue
         bool isEmpty()
         {
             return (head == nullptr);
-        }
-
-        // Temp display O(n)
-        void display()
-        {
-            Node* curr = head;
-            while (curr != NULL)
-            {
-                cout << curr->data + " ";
-                curr = curr->next;
-            }
-            cout << endl;
         }
 };
 
