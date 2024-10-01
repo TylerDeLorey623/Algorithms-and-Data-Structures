@@ -11,7 +11,7 @@ TARGET = main
 ifeq ($(OS),Windows_NT)
 	TARGET_DEL = main.exe
 else
-	TARGET_DEL = main.out
+	TARGET_DEL = main
 endif
 
 # Source files
