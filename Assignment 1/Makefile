@@ -7,13 +7,6 @@ CXXFLAGS = -Wall -g
 # Target executable
 TARGET = main
 
-# For deleting the target
-ifeq ($(OS),Windows_NT)
-	TARGET_DEL = main.exe
-else
-	TARGET_DEL = main
-endif
-
 # Source files
 SRCS = main.cpp
 
@@ -39,10 +32,6 @@ run: $(TARGET)
 	./$(TARGET)
 
 # Clean rule to remove generated files
-# Uses del if on windows, uses rm on Unix-like systems
-clean:
-ifeq ($(OS),Windows_NT)
-	del $(TARGET_DEL) $(OBJS)
-else
-	rm $(TARGET_DEL) $(OBJS)
-endif
+# Uses del if on windows, uses rm on Unix-like systems (and Git Bash)
+clean: 
+	del main.exe $(OBJS) || rm -f main $(OBJS)
