@@ -18,6 +18,7 @@ bool isPalindrome(string word)
 
     char letter;
     int wordSize = word.size();
+    int sizeWithoutSpaces = 0;
 
     bool palindrome = true;
 
@@ -25,16 +26,17 @@ bool isPalindrome(string word)
     for (int index = 0; index < wordSize; index++)
     {
         letter = toupper(word[index]);
-
+    
         if (letter != ' ')
         {
             myStack.push(letter);
             myQueue.enqueue(letter);
+            sizeWithoutSpaces++;
         }
     }
 
     // Pop from Stack, dequeue from Queue, compare letters to check if its palindromic
-    for (int index = 0; index < wordSize; index++)
+    for (int index = 0; index < sizeWithoutSpaces; index++)
     {
         sLetter = myStack.pop();
         qLetter = myQueue.dequeue();
