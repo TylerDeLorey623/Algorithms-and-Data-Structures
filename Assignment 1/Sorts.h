@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <climits>
 
 using namespace std;
 
@@ -100,13 +101,14 @@ int insertionSort(vector<string> &myItems)
 }
 
 // Merges left and right arrays into a larger sorted array
-int merge(vector <string> &myItems, vector<string> &left, vector<string> &right, int m)
+int merge(vector <string> &myItems, int begin, int mid, int end)
 {
     int comparisonNum = 0;
 
-    // Tracks both sides of the array
-    int lIndex = 0, rIndex = 0;
-    int lSize = left.size(), rSize = right.size();
+    // Tracks both sides of the array (index and size)
+    int lIndex = begin, rIndex = mid + 1;
+    int lSize = mid - begin + 1;
+    int rSize = end - mid;
 
     // Size of merged array
     int n = lSize + rSize;
@@ -119,27 +121,27 @@ int merge(vector <string> &myItems, vector<string> &left, vector<string> &right,
         comparisonNum++;
 
         // If right side has been completely traversed, copy remaining left half items into tempItems 
-        if (rIndex >= rSize)
+        if (rIndex > end)
         {
-            tempItems[k] = left[lIndex];
+            tempItems[k] = myItems[lIndex];
             lIndex++;
         }
         // If left side has been completely traversed, copy remaining right half items into tempItems 
-        else if (lIndex >= lSize)
+        else if (lIndex > mid)
         {
-            tempItems[k] = right[rIndex];
+            tempItems[k] = myItems[rIndex];
             rIndex++;
         }
         // If current element in left half is less than current element in right half, copy left element into tempItems
-        else if (left[lIndex] < right[rIndex])
+        else if (myItems[lIndex] < myItems[rIndex])
         {
-            tempItems[k] = left[lIndex];
+            tempItems[k] = myItems[lIndex];
             lIndex++;
         }
         // If current element in right half is less than or equal to current element in left half, copy right element into tempItems
         else
         {
-            tempItems[k] = right[rIndex];
+            tempItems[k] = myItems[rIndex];
             rIndex++;
         }
     }
@@ -147,7 +149,7 @@ int merge(vector <string> &myItems, vector<string> &left, vector<string> &right,
     // Copies sorted tempItems to myItems
     for (int k = 0; k < n; k++)
     {
-        myItems[k] = tempItems[k];
+        myItems[begin + k] = tempItems[k];
     }
 
     return comparisonNum;
@@ -155,27 +157,31 @@ int merge(vector <string> &myItems, vector<string> &left, vector<string> &right,
 
 // Returns number of comparisons
 // Pass by reference (changes to myItems affects magicItems)
-int mergeSort(vector<string> &myItems)
+int mergeSort(vector<string> &myItems, int begin = 0, int end = INT_MIN)
 {
     int comparisonNum = 0;
-    int size = myItems.size();
 
-    if (size <= 1)
+    // If end parameter wasn't clarified, set it to the last index of the array (myItems[end] returns last element)
+    // This means the function is dealing with the entire list
+    if (end == INT_MIN)
+    {
+        end = myItems.size() - 1;
+    }
+    // Base case
+    else if (begin >= end)
     {
         return comparisonNum;
     }
 
-    int mid = size / 2;
+    // Gets the mid point for splitting the array
+    int mid = (begin + end) / 2;
 
     // Divides array into left and right sides
-    vector<string> leftArray(myItems.begin(), myItems.begin() + mid);
-    comparisonNum += mergeSort(leftArray);
-
-    vector<string> rightArray(myItems.begin() + mid, myItems.end());
-    comparisonNum += mergeSort(rightArray);
+    comparisonNum += mergeSort(myItems, begin, mid);
+    comparisonNum += mergeSort(myItems, mid + 1, end);
 
     // Conquers each section
-    comparisonNum += merge(myItems, leftArray, rightArray, mid);
+    comparisonNum += merge(myItems, begin, mid, end);
 
     return comparisonNum;
 }
@@ -222,13 +228,12 @@ pair<int, int> partition(vector<string> &myItems, int p, int begin, int end)
 int quickSort(vector<string> &myItems, int begin = 0, int end = INT_MIN)
 {
     int comparisonNum = 0;
-    int size = myItems.size();
 
     // If end parameter wasn't clarified, set it to the last index of the array (myItems[end] returns last element)
     // This means the function is dealing with the entire list
     if (end == INT_MIN)
     {
-        end = size - 1;
+        end = myItems.size() - 1;
     }
     // Base case
     else if (begin >= end)
