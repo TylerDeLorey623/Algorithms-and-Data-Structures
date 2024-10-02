@@ -50,6 +50,9 @@ int main()
     }
     cout << endl;
 
+    // Shuffles magic items
+    shuffle(magicItems);
+
     // Performs Selection Sort O(n^2)
     comparisonNum = selectionSort(magicItems);
     cout << "Number of Comparisons doing Selection Sort: " << comparisonNum << endl;
@@ -74,4 +77,20 @@ int main()
     // Performs Quick Sort O(n * log(n))
     comparisonNum = quickSort(magicItems);
     cout << "Number of Comparisons doing Quick Sort: " << comparisonNum << endl;
+
+    cout << endl;
+
+    // Performs every sort again, but when array is already sorted
+    comparisonNum = selectionSort(magicItems);
+    cout << "Number of Comparisons doing Selection Sort on a sorted array: " << comparisonNum << endl;
+
+    comparisonNum = insertionSort(magicItems);
+    cout << "Number of Comparisons doing Insertion Sort on a sorted array: " << comparisonNum << endl;
+
+    comparisonNum = mergeSort(magicItems);
+    cout << "Number of Comparisons doing Merge Sort on a sorted array: " << comparisonNum << endl;
+
+    comparisonNum = quickSort(magicItems);
+    cout << "Number of Comparisons doing Quick Sort on a sorted array: " << comparisonNum << endl;
+
 }
