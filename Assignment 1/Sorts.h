@@ -243,14 +243,31 @@ int quickSort(vector<string> &myItems, int begin = 0, int end = INT_MIN)
         return comparisonNum;
     }
 
-    // Selects random index for the partition
+    // Selects random index for the contenders
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<> distrib(begin, end);
-    int randomPivot = distrib(gen);
+    int contender1 = distrib(gen);
+    int contender2 = distrib(gen);
+    int contender3 = distrib(gen);
+
+    // Find best pivot value out of the three contenders
+    int pivotValue = 0;
+    if ((contender1 > contender2 && contender2 > contender3) || (contender3 > contender2 && contender2 > contender1))
+    {
+        pivotValue = contender2;
+    }
+    else if ((contender2 > contender3 && contender3 > contender1) || (contender1 > contender3 && contender3 > contender2))
+    {
+        pivotValue = contender3;
+    }
+    else
+    {
+        pivotValue = contender1;
+    }
 
     // Choosing the pivot element to be myItems[randomPivot]
-    auto parResult = partition(myItems, randomPivot, begin, end);
+    auto parResult = partition(myItems, pivotValue, begin, end);
 
     // Gets pivot index and comparison num
     int r = parResult.first;
