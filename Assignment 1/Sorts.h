@@ -83,14 +83,16 @@ int insertionSort(vector<string> &myItems)
 
         int end = i - 1;
 
+        comparisonNum++;
+
         // Find place for the current key value
         while (end >= 0 && myItems[end] > key)
         {
-            comparisonNum++;
-
             // Shift element to the right if not correct position
             myItems[end + 1] = myItems[end];
             end--;
+
+            comparisonNum++;
         }
 
         // Insert the key into correct position
