@@ -10,13 +10,13 @@ using namespace std;
 class Node 
 {
     public:
-        // Holds the item name for this node
+        // Holds a single character for this node
         char data;
 
         // Pointer that points to the next node
         Node* next;
 
-        // Declares parameterized constructor (defined in Node.cpp)
+        // Declares parameterized constructor
         Node(char value)
         {
             this->data = value;
