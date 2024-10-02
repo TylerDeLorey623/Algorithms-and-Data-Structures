@@ -15,6 +15,7 @@ int main()
 
     string word;
 
+    int palindromNum = 0;
     int comparisonNum = 0;
     
     // File IO
@@ -46,9 +47,10 @@ int main()
         if (isPalindrome(word))
         {
             cout << word << endl;
+            palindromNum++;
         }
     }
-    cout << endl;
+    cout << "Number of Palindromes: " << palindromNum << endl << endl;
 
     // Shuffles magic items
     shuffle(magicItems);
