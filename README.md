@@ -29,5 +29,5 @@ If you want to remove the extra files added when running "make", simply run:
 The programs should work if you're running it on either Windows or Linux, but I'm not sure if it would be functional running on Mac.
 If any problem arises, just let me know so I could try to fix it.
 
-Quick Note: When running "make clean", if you see a warning message saying "del: Permission denied" or "del: command not found" when running on Linux,
+Quick Note: When running "make clean", if you see a warning message saying something like "'rm' is not recognized as an internal or external command..." when running on Windows,
 don't worry about it. It will still remove the unneccesary files.
