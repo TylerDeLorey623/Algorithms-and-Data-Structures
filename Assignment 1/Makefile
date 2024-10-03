@@ -34,4 +34,4 @@ run: $(TARGET)
 # Clean rule to remove generated files
 # Uses del if on windows, uses rm on Unix-like systems (and Git Bash)
 clean: 
-	del main.exe $(OBJS) || rm -f main $(OBJS)
+	rm -f main $(OBJS) || del main.exe $(OBJS) 
