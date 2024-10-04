@@ -55,14 +55,14 @@ int selectionSort(vector<string> &myItems)
                 minIndex = j;
             }
             comparisonNum++;
+        }
 
-            // Swap minimum element with element at i
-            if (minIndex != i)
-            {
-                temp = myItems[minIndex];
-                myItems[minIndex] = myItems[i];
-                myItems[i] = temp;
-            }
+        // Swap minimum element with element at i
+        if (minIndex != i)
+        {
+            temp = myItems[minIndex];
+            myItems[minIndex] = myItems[i];
+            myItems[i] = temp;
         }
     }
 
