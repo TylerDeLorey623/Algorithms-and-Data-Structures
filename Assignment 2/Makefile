@@ -11,7 +11,7 @@ TARGET = main
 SRCS = main.cpp
 
 # Header files
-HEADERS = Sort.h Search.h
+HEADERS = Sort.h Search.h Hash.h Node.h
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
