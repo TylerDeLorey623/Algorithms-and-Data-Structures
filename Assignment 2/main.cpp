@@ -5,6 +5,7 @@
 
 #include "./Sort.h"
 #include "./Search.h"
+#include "./Hash.h"
 
 using namespace std;
 
@@ -52,6 +53,7 @@ int main()
     sort(magicItems);
 
     // Perform linear search to find each random item
+    cout << "LINEAR SEARCH:" << endl;
     for (int i = 0; i < ITEM_COUNT; i++)
     {
         comparisonNum = linearSearch(magicItems, randomItems[i]);
@@ -66,6 +68,7 @@ int main()
     // Perform binary search to find each random item
     avg = 0;
 
+    cout << "BINARY SEARCH:" << endl;
     for (int i = 0; i < ITEM_COUNT; i++)
     {
         comparisonNum = binarySearch(magicItems, randomItems[i]);
@@ -76,4 +79,24 @@ int main()
     // Find average comparisons for Binary Search
     avg = avg / ITEM_COUNT;
     cout << endl << "Average Number of Comparisons for Binary Search: " << setprecision(3) << avg << endl << endl;
+
+    // Loading hash table (defined in Hash.h) with magicItems array
+    hashPut(magicItems);
+
+    // Search for the 42 items using the hash table
+    avg = 0;
+    cout << "HASH TABLE SEARCH:" << endl;
+    for (int i = 0; i < ITEM_COUNT; i++)
+    {
+        comparisonNum = hashGet(randomItems[i]);
+        cout << "Comparisons to find \"" << randomItems[i] << "\": " << comparisonNum << endl;
+        avg += comparisonNum;
+    }
+    
+    // Find average comparisons for Hash table Search
+    avg = avg / ITEM_COUNT;
+    cout << endl << "Average Number of Comparisons for Hash Table Search: " << setprecision(3) << avg << endl << endl;
+
+    // Unload hash table
+    hashUnload();
 }
