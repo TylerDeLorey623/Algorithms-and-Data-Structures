@@ -10,7 +10,7 @@ using namespace std;
 class Node 
 {
     public:
-        // Holds a single character for this node
+        // Holds a string as the Node's data
         string data;
 
         // Pointer that points to the next node
