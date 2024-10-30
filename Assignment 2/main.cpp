@@ -63,7 +63,7 @@ int main()
 
     // Find average comparisons for Linear Search
     avg = avg / ITEM_COUNT;
-    cout << endl << "Average Number of Comparisons for Linear Search: " << setprecision(5) << avg << endl << endl;
+    cout << endl << "Average Number of Comparisons for Linear Search: " << fixed << setprecision(2) << avg << endl << endl;
 
     // Perform binary search to find each random item
     avg = 0;
@@ -78,7 +78,7 @@ int main()
 
     // Find average comparisons for Binary Search
     avg = avg / ITEM_COUNT;
-    cout << endl << "Average Number of Comparisons for Binary Search: " << setprecision(3) << avg << endl << endl;
+    cout << endl << "Average Number of Comparisons for Binary Search: " << fixed << setprecision(2) << avg << endl << endl;
 
     // Loading hash table (defined in Hash.h) with magicItems array
     hashPut(magicItems);
@@ -95,7 +95,7 @@ int main()
     
     // Find average comparisons for Hash table Search
     avg = avg / ITEM_COUNT;
-    cout << endl << "Average Number of Comparisons for Hash Table Search: " << setprecision(3) << avg << endl << endl;
+    cout << endl << "Average Number of Comparisons for Hash Table Search: " << fixed << setprecision(2) << avg << endl << endl;
 
     // Unload hash table
     hashUnload();
