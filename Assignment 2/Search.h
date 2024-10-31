@@ -39,7 +39,7 @@ int binarySearch(vector<string> myItems, string target, int comparisonNum = 0, i
     {
         end = myItems.size() - 1;
     }
-
+    int returnValue = 0;
     int midPoint = int((begin + end)/2);
 
     comparisonNum++;
@@ -47,18 +47,20 @@ int binarySearch(vector<string> myItems, string target, int comparisonNum = 0, i
     // If the array has no more items to search OR it was found, the function finished
     if ((begin > end) || (myItems[midPoint] == target))
     {
-        return comparisonNum;
+        returnValue = comparisonNum;
     }
     // If target is smaller than the midpoint (in ASCII terms)
     else if (target < myItems[midPoint])
     {
-        return binarySearch(myItems, target, comparisonNum, begin, midPoint - 1);
+        returnValue = binarySearch(myItems, target, comparisonNum, begin, midPoint - 1);
     }
     // If target is larger than the midpoint (in ASCII terms)
     else
     {
-        return binarySearch(myItems, target, comparisonNum, midPoint + 1, end);
+        returnValue = binarySearch(myItems, target, comparisonNum, midPoint + 1, end);
     }
+
+    return returnValue;
 }
 
 #endif
