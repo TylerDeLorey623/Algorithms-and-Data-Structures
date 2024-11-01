@@ -15,7 +15,7 @@ Node *hashTable[HASH_TABLE_SIZE];
 int hashIndex(string item)
 {
     // Unsigned cannot represent negative numbers, fixes overflow
-    unsigned long total = 0;
+    unsigned int total = 0;
 
     // Calculates index based on adding ASCII values of characters in the string
     // Multiplies by 13 each time to reduce collision chance
