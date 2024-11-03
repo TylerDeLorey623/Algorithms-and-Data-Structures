@@ -72,6 +72,13 @@ class BST
             cout << endl;
         }
 
+        // Function that programmers calls in main, traversal starts at the root Node
+        void inorderTrav()
+        {
+            inorderBST(root);
+        }
+
+        // Does an inorder traversal of BST (Sorted Output)
         void inorderBST(Node* curNode)
         {
             if (curNode != nullptr)
@@ -80,6 +87,49 @@ class BST
                 cout << curNode->data << endl;
                 inorderBST(curNode->right);
             }
+        }
+
+        // Searches for target item in BST
+        int search(string target)
+        {
+            int comparisonNum = 0;
+            Node* curNode = root;
+            string currentData;
+
+            // Traverses BST until it ends up in correct position
+            while (curNode != NULL)
+            {
+                currentData = curNode->data;
+
+                comparisonNum++;
+                
+                // If target matches current Node data, it has been found
+                if (target == currentData)
+                {
+                    cout << "FOUND ";
+                    break;
+                }
+                // If target is smaller than current Node data, traverse left subtree
+                else if (target < currentData)
+                {
+                    cout << "L ";
+                    curNode = curNode->left;
+                }
+                // If target is greater than current Node data, traverse right subtree
+                else
+                {
+                    cout << "R ";
+                    curNode = curNode->right;
+                }
+            }
+
+            // If loop finishes and the current Node is NULL, means data has not been found
+            if (curNode == NULL)
+            {
+                cout << "NOT_FOUND ";
+            }
+
+            return comparisonNum;
         }
 };
 
