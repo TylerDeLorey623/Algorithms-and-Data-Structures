@@ -39,7 +39,7 @@ int main()
     // Read each line from file and insert it into the BST
     while (getline(file, item))
     {
-        myTree.insert(item);
+        //myTree.insert(item);
     }
 
     // Close magicitems file
@@ -128,6 +128,16 @@ int main()
                 }
             }
         }
+    }
+
+    cout << endl;
+
+    // Print matrix for each Graph
+    for (int curGraph = 0, graphCount = myGraphs.size(); curGraph < graphCount; curGraph++)
+    {
+        cout << "MATRIX FOR GRAPH #" << curGraph + 1 << ": " << endl;
+        myGraphs[curGraph].printMatrix();
+        cout << endl;
     }
 
     file.close();
