@@ -11,7 +11,7 @@ TARGET = main
 SRCS = main.cpp
 
 # Header files
-HEADERS = Node.h BST.h Graph.h Vertex.h Edge.h
+HEADERS = Node.h BST.h Graph.h Vertex.h Matrix.h
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
