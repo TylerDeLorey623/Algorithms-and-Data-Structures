@@ -6,6 +6,7 @@
 
 #include "BST.h"
 #include "Graph.h"
+#include "Matrix.h"
 
 using namespace std;
 
@@ -15,8 +16,9 @@ int main()
     BST myTree;
 
     // Vector of Graphs Declaration
-    vector<Graph> myGraphs;
-    int curGraphIndex = -1;
+    vector<Graph*> myGraphs;
+    vector<Matrix*> myMatrices;
+    int curIndex = -1;
 
     int comparisonNum = 0;
     float avg = 0;
@@ -47,7 +49,7 @@ int main()
 
     // Prints out entire BST with an in-order traversal
     cout << endl << "INORDER TRAVERSAL OF BST:" << endl;
-    myTree.inorderTrav();
+    //myTree.inorderTrav();
 
     // Opening another file
     file.open("magicitems-find-in-bst.txt");
@@ -81,11 +83,12 @@ int main()
         return 1;
     }
 
-    // Read each line from file and set up the Graphs
+    // Read each line from file and set up the Graphs and Matrices
     while (getline(file, command))
     {
         istringstream currentWord(command);
         string word, nextWord, vertexID, vertex1, vertex2;
+        int vertex1Index = 0, vertex2Index = 0;
 
         // Gets the current word in the command line
         while (currentWord >> word)
@@ -102,9 +105,8 @@ int main()
                 currentWord >> nextWord;
                 if (nextWord == "graph")
                 {
-                    cout << "GRAPH CREATION" << endl;
-                    myGraphs.push_back(Graph());
-                    curGraphIndex++;
+                    myGraphs.push_back(new Graph());
+                    curIndex++;
                 }
             }
             // If command starts with "add"
@@ -115,30 +117,53 @@ int main()
                 if (nextWord == "vertex")
                 {
                     currentWord >> vertexID;
-                    cout << "ADDING VERTEX " << vertexID << endl;
-                    myGraphs[curGraphIndex].addVertex(vertexID);
+                    myGraphs[curIndex]->addVertex(vertexID);
                 }
                 // If command starts with "add edge", add an edge to current Graph that connects the two Vertices
                 else if (nextWord == "edge")
                 {
+                    // Creates Matrix for Graph if it hasn't been created already (ASSUMES ALL VERTICES WERE ALREADY DEFINED IN FILE BEFORE THE EDGES)
+                    if (int(myMatrices.size()) <= curIndex)
+                    {
+                        myMatrices.push_back(new Matrix(myGraphs[curIndex]->verticesSize(), myGraphs[curIndex]));
+                    }
+
+                    // Gets connecting first and second vertex ID 
                     currentWord >> vertex1;
                     currentWord >> vertex2 >> vertex2;
-                    cout << "EDGE ADDING " << vertex1 << " to " << vertex2 << endl;
-                    myGraphs[curGraphIndex].addEdge(vertex1, vertex2);
+
+                    // Gets the index of these Vertices in the vertices array
+                    vertex1Index = myGraphs[curIndex]->findVertexIndex(vertex1);
+                    vertex2Index = myGraphs[curIndex]->findVertexIndex(vertex2);
+
+                    // Sets matrix value to 1 at these indices
+                    myMatrices[curIndex]->addValue(vertex1Index, vertex2Index);
+
+                    // Adds edge linking each Vertex together using these indices
+                    myGraphs[curIndex]->addEdge(vertex1Index, vertex2Index);
                 }
             }
         }
     }
 
-    cout << endl;
+    file.close();
 
     // Print matrix for each Graph
-    for (int curGraph = 0, graphCount = myGraphs.size(); curGraph < graphCount; curGraph++)
+    cout << endl;
+    for (int curMatrix = 0, matrixCount = myMatrices.size(); curMatrix < matrixCount; curMatrix++)
     {
-        cout << "MATRIX FOR GRAPH #" << curGraph + 1 << ": " << endl;
-        myGraphs[curGraph].printMatrix();
+        cout << "MATRIX FOR GRAPH #" << curMatrix + 1 << ": " << endl;
+        myMatrices[curMatrix]->printMatrix();
         cout << endl;
     }
 
-    file.close();
+    // Unloading each Graph and Matrix
+    for (int curGraph = 0, graphCount = myGraphs.size(); curGraph < graphCount; curGraph++)
+    {
+        myGraphs[curGraph]->unloadGraph();
+        delete(myGraphs[curGraph]);
+        delete(myMatrices[curGraph]);
+    }
+    myGraphs.clear();
+    myMatrices.clear();
 }
