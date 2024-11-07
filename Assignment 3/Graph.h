@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Vertex.h"
-#include "Edge.h"
 
 using namespace std;
 
@@ -13,90 +12,54 @@ using namespace std;
 class Graph 
 {
     public:
-        // Vectors of the Graph's Vertices and Edges
-        vector<Vertex> vertices;
-        vector<Edge> edges;
+        // Vectors of the Graph's Vertices
+        vector<Vertex*> vertices;
 
         // Add a Vertex to the Graph
         void addVertex(string vertexID)
         {
-            Vertex newVertex = Vertex(vertexID);
+            Vertex* newVertex = new Vertex(vertexID);
             vertices.push_back(newVertex);
         }
 
-        // Finds a specific Vertex based on its ID
-        Vertex* findVertex(string vertexID)
+        // Finds a specific Vertex index in Vertices Array based on its ID
+        int findVertexIndex(string vertexID)
         {
-            for (int i = 0, n = vertices.size(); i < n; i++)
+            for (int index = 0, n = vertices.size(); index < n; index++)
             {
-                if (vertices[i].id == vertexID)
+                if (vertices[index]->id == vertexID)
                 {
-                    return &vertices[i];
+                    return index;
                 }
             }
 
             throw runtime_error("Vertex not found: " + vertexID);
         }
 
-        // Adds an edge between two Vertices
-        void addEdge(string v1, string v2)
+        // Adds an edge between two Vertices (parameters are indices in vertices Array)
+        void addEdge(int vertex1, int vertex2)
         {
-            Vertex* vertex1 = findVertex(v1);
-            Vertex* vertex2 = findVertex(v2);
-
-            Edge newEdge = Edge(vertex1, vertex2);
-            edges.push_back(newEdge);
-            vertex1->addEdgeToVertex(&newEdge);
-            vertex2->addEdgeToVertex(&newEdge);
+            vertices[vertex1]->addNeighbor(vertices[vertex2]);
+            vertices[vertex2]->addNeighbor(vertices[vertex1]);
         }
 
-        // Prints a matrix for the Graph
-        void printMatrix()
+        // Gets the size of the vertices Array
+        int verticesSize()
         {
-            // Initialize matrix variables
-            int vertSize = vertices.size();
-            int edgeCount = edges.size();
-            string firstVertex, secondVertex;
-            int first = 0, second = 0;
+            return vertices.size();
+        }
 
-            // Initialize matrix 2D array
-            int matrix[vertSize][vertSize];
-
-            // Finds connected vertices
-            for (int iter = 0; iter < edgeCount; iter++)
+        // Unloads each Vertex in the Graph
+        void unloadGraph()
+        {
+            // Deletes each Vertex in the Graph
+            for (int i = 0, n = vertices.size(); i < n; i++)
             {
-                firstVertex = edges[iter].vertex1->id;
-                secondVertex = edges[iter].vertex2->id;
-                first = stoi(firstVertex) - 1;
-                second = stoi(secondVertex) - 1;
-
-                matrix[first][second] = 1;
-                matrix[second][first] = 1;
+                delete(vertices[i]);
             }
 
-            // Prints entire Matrix
-            cout << "M ";
-            for (int i = 0; i < vertSize; i++)
-            {
-                cout << vertices[i].id << " ";
-            }
-            cout << endl;
-
-            for (int i = 0; i < vertSize; i++)
-            {
-                cout << vertices[i].id << " ";
-                for (int j = 0; j < vertSize; j++)
-                {
-                    if (matrix[i][j] != 1)
-                    {
-                        matrix[i][j] = 0;
-                    }
-                    
-                    cout << matrix[i][j] << " ";
-                }
-                cout << endl;
-            }
-
+            // Clears the Vertices Array
+            vertices.clear();
         }
 };
 
