@@ -6,22 +6,24 @@
 
 #include "Graph.h"
 
-class Edge;
-
 class Vertex
 {
     public:
+        // Members of Vertex class
         string id;
-        vector<Edge*> edges;
+        bool processed = false;
+        vector<Vertex*> neighbors;
 
+        // Parameterized constructor for Vertex class
         Vertex(string ID)
         {
             this->id = ID;
         }
 
-        void addEdgeToVertex(Edge* addedEdge)
+        // Connects a Vertex to this Vertex (adding an Edge)
+        void addNeighbor(Vertex* addedVertex)
         {
-            edges.push_back(addedEdge);
+            neighbors.push_back(addedVertex);
         }
 };
 
