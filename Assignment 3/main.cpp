@@ -4,9 +4,9 @@
 #include <sstream>
 #include <vector>
 
-#include "BST.h"
-#include "Graph.h"
-#include "Matrix.h"
+#include "./BinarySearchTree/BST.h"
+#include "./UndirectedGraph/Graph.h"
+#include "./UndirectedGraph/Matrix.h"
 
 using namespace std;
 
@@ -31,7 +31,7 @@ int main()
     string command;
 
     // Open magicitems file
-    file.open("magicitems.txt");
+    file.open("./BinarySearchTree/magicitems.txt");
     if (!file.is_open())
     {
         cout << "File failed to open." << endl;
@@ -52,7 +52,7 @@ int main()
     //myTree.inorderTrav();
 
     // Opening another file
-    file.open("magicitems-find-in-bst.txt");
+    file.open("./BinarySearchTree/magicitems-find-in-bst.txt");
     if (!file.is_open())
     {
         cout << "File failed to open." << endl;
@@ -76,7 +76,7 @@ int main()
     cout << endl << "Average Number of Comparisons for BST Search: " << fixed << setprecision(2) << avg << endl << endl;
 
     // Open graph file
-    file.open("graphs1.txt");
+    file.open("./UndirectedGraph/graphs1.txt");
     if (!file.is_open())
     {
         cout << "File failed to open." << endl;
