@@ -11,7 +11,15 @@ TARGET = main
 SRCS = main.cpp
 
 # Header files
-HEADERS = BinarySearchTree/Node.h BinarySearchTree/BST.h UndirectedGraph/Graph.h UndirectedGraph/Vertex.h UndirectedGraph/Matrix.h
+HEADERS = BinarySearchTree/Node.h \
+		  BinarySearchTree/BST.h \
+		  BinarySearchTree/magicitems.txt \
+		  BinarySearchTree/magicitems-find-in-bst.txt \
+		  UndirectedGraph/Graph.h \
+		  UndirectedGraph/Vertex.h \
+		  UndirectedGraph/Matrix.h \
+		  UndirectedGraph/AdjacencyList.h \
+		  UndirectedGraph/graphs1.txt
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
