@@ -11,6 +11,9 @@
 
 using namespace std;
 
+// Prototype for printInformation function
+void printInformation(bool needToPrint, int& graphNum, Matrix* matrix, Graph* graph);
+
 int main()
 {
     // BST Declaration
@@ -19,7 +22,7 @@ int main()
     // Graph and Matrix Declaration
     Graph* myGraph;
     Matrix* myMatrix;
-    bool needToPrint = false;
+    bool check = false;
     int curGraphNum = 0;
 
     int comparisonNum = 0;
@@ -43,7 +46,7 @@ int main()
     // Read each line from file and insert it into the BST
     while (getline(file, item))
     {
-        myTree.insert(item);
+        //myTree.insert(item);
     }
 
     // Close magicitems file
@@ -51,7 +54,7 @@ int main()
 
     // Prints out entire BST with an in-order traversal
     cout << endl << "INORDER TRAVERSAL OF BST:" << endl;
-    myTree.inorderTrav();
+    //myTree.inorderTrav();
 
     // Opening another file
     file.open("./BinarySearchTree/magicitems-find-in-bst.txt");
@@ -108,24 +111,8 @@ int main()
                 if (nextWord == "graph")
                 {
                     // Prints information on Graph before creating a new one (if there exists one)
-                    if (needToPrint)
-                    {
-                        curGraphNum++;
-
-                        cout << endl;
-                        cout << "MATRIX FOR GRAPH #" << curGraphNum << ": " << endl;
-                        myMatrix->printMatrix();
-
-                        cout << endl;
-                        cout << "ADJACENCY LIST FOR GRAPH #" << curGraphNum << ": " << endl;
-                        printAdjacencyList(myGraph);
-
-                        myGraph->unloadGraph();
-                        delete(myMatrix);
-                        delete(myGraph);
-                    }
-
-                    needToPrint = true;
+                    printInformation(check, curGraphNum, myMatrix, myGraph);
+                    check = true;
 
                     // Creates new Graph and Matrix
                     myGraph = new Graph();
@@ -167,20 +154,42 @@ int main()
     file.close();
 
     // Prints information for the last Graph if it exists
+    printInformation(check, curGraphNum, myMatrix, myGraph);
+}
+
+void printInformation(bool needToPrint, int& graphNum, Matrix* matrix, Graph* graph)
+{
     if (needToPrint)
     {
-        curGraphNum++;
+        graphNum++;
+
+        // Print Matrix
+        cout << endl;
+        cout << "MATRIX FOR GRAPH #" << graphNum << ": " << endl;
+        matrix->printMatrix();
+
+        // Print Adjacency List
+        cout << endl;
+        cout << "ADJACENCY LIST FOR GRAPH #" << graphNum << ": " << endl;
+        printAdjacencyList(graph);
+
+        // Depth first traversal starting from first Vertex
+        cout << endl;
+        cout << "DEPTH-FIRST TRAVERSAL FOR GRAPH #" << graphNum << ": " << endl;
+        graph->DFS(graph->vertices[0]);
+
+        // Reset processed values
+        graph->resetProcessed();
+
+        // Breadth first traversal starting from first Vertex
+        cout << endl;
+        cout << "BREADTH-FIRST TRAVERSAL FOR GRAPH #" << graphNum << ": " << endl;
+        graph->BFS(graph->vertices[0]);
 
         cout << endl;
-        cout << "MATRIX FOR GRAPH #" << curGraphNum << ": " << endl;
-        myMatrix->printMatrix();
 
-        cout << endl;
-        cout << "ADJACENCY LIST FOR GRAPH #" << curGraphNum << ": " << endl;
-        printAdjacencyList(myGraph);
-
-        myGraph->unloadGraph();
-        delete(myMatrix);
-        delete(myGraph);
+        graph->unloadGraph();
+        delete(matrix);
+        delete(graph);
     }
 }
