@@ -19,6 +19,7 @@ HEADERS = BinarySearchTree/Node.h \
 		  UndirectedGraph/Vertex.h \
 		  UndirectedGraph/Matrix.h \
 		  UndirectedGraph/AdjacencyList.h \
+		  UndirectedGraph/Queue.h \
 		  UndirectedGraph/graphs1.txt
 
 # Object files
