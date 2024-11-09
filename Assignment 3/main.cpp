@@ -7,6 +7,7 @@
 #include "./BinarySearchTree/BST.h"
 #include "./UndirectedGraph/Graph.h"
 #include "./UndirectedGraph/Matrix.h"
+#include "./UndirectedGraph/AdjacencyList.h"
 
 using namespace std;
 
@@ -15,10 +16,11 @@ int main()
     // BST Declaration
     BST myTree;
 
-    // Vector of Graphs Declaration
-    vector<Graph*> myGraphs;
-    vector<Matrix*> myMatrices;
-    int curIndex = -1;
+    // Graph and Matrix Declaration
+    Graph* myGraph;
+    Matrix* myMatrix;
+    bool needToPrint = false;
+    int curGraphNum = 0;
 
     int comparisonNum = 0;
     float avg = 0;
@@ -41,7 +43,7 @@ int main()
     // Read each line from file and insert it into the BST
     while (getline(file, item))
     {
-        //myTree.insert(item);
+        myTree.insert(item);
     }
 
     // Close magicitems file
@@ -49,7 +51,7 @@ int main()
 
     // Prints out entire BST with an in-order traversal
     cout << endl << "INORDER TRAVERSAL OF BST:" << endl;
-    //myTree.inorderTrav();
+    myTree.inorderTrav();
 
     // Opening another file
     file.open("./BinarySearchTree/magicitems-find-in-bst.txt");
@@ -101,46 +103,62 @@ int main()
             // If command starts with "new"
             else if (word == "new")
             {
-                // If command starts with "new graph", create a new Graph
+                // If command starts with "new graph", create a new Graph and Matrix
                 currentWord >> nextWord;
                 if (nextWord == "graph")
                 {
-                    myGraphs.push_back(new Graph());
-                    curIndex++;
+                    // Prints information on Graph before creating a new one (if there exists one)
+                    if (needToPrint)
+                    {
+                        curGraphNum++;
+
+                        cout << endl;
+                        cout << "MATRIX FOR GRAPH #" << curGraphNum << ": " << endl;
+                        myMatrix->printMatrix();
+
+                        cout << endl;
+                        cout << "ADJACENCY LIST FOR GRAPH #" << curGraphNum << ": " << endl;
+                        printAdjacencyList(myGraph);
+
+                        myGraph->unloadGraph();
+                        delete(myMatrix);
+                        delete(myGraph);
+                    }
+
+                    needToPrint = true;
+
+                    // Creates new Graph and Matrix
+                    myGraph = new Graph();
+                    myMatrix = new Matrix();
                 }
             }
             // If command starts with "add"
             else if (word == "add")
             {
-                // If command starts with "add vertex", add a Vertex to current Graph
+                // If command starts with "add vertex", add a Vertex to Graph and increment size of Matrix
                 currentWord >> nextWord;
                 if (nextWord == "vertex")
                 {
                     currentWord >> vertexID;
-                    myGraphs[curIndex]->addVertex(vertexID);
+                    myGraph->addVertex(vertexID);
+                    myMatrix->incrementSize(vertexID);
                 }
                 // If command starts with "add edge", add an edge to current Graph that connects the two Vertices
                 else if (nextWord == "edge")
                 {
-                    // Creates Matrix for Graph if it hasn't been created already (ASSUMES ALL VERTICES WERE ALREADY DEFINED IN FILE BEFORE THE EDGES)
-                    if (int(myMatrices.size()) <= curIndex)
-                    {
-                        myMatrices.push_back(new Matrix(myGraphs[curIndex]->verticesSize(), myGraphs[curIndex]));
-                    }
-
                     // Gets connecting first and second vertex ID 
                     currentWord >> vertex1;
                     currentWord >> vertex2 >> vertex2;
 
                     // Gets the index of these Vertices in the vertices array
-                    vertex1Index = myGraphs[curIndex]->findVertexIndex(vertex1);
-                    vertex2Index = myGraphs[curIndex]->findVertexIndex(vertex2);
-
-                    // Sets matrix value to 1 at these indices
-                    myMatrices[curIndex]->addValue(vertex1Index, vertex2Index);
+                    vertex1Index = myGraph->findVertexIndex(vertex1);
+                    vertex2Index = myGraph->findVertexIndex(vertex2);
 
                     // Adds edge linking each Vertex together using these indices
-                    myGraphs[curIndex]->addEdge(vertex1Index, vertex2Index);
+                    myGraph->addEdge(vertex1Index, vertex2Index);
+
+                    // Sets matrix value to 1 at these indices
+                    myMatrix->addValue(vertex1Index, vertex2Index);
                 }
             }
         }
@@ -148,22 +166,21 @@ int main()
 
     file.close();
 
-    // Print matrix for each Graph
-    cout << endl;
-    for (int curMatrix = 0, matrixCount = myMatrices.size(); curMatrix < matrixCount; curMatrix++)
+    // Prints information for the last Graph if it exists
+    if (needToPrint)
     {
-        cout << "MATRIX FOR GRAPH #" << curMatrix + 1 << ": " << endl;
-        myMatrices[curMatrix]->printMatrix();
-        cout << endl;
-    }
+        curGraphNum++;
 
-    // Unloading each Graph and Matrix
-    for (int curGraph = 0, graphCount = myGraphs.size(); curGraph < graphCount; curGraph++)
-    {
-        myGraphs[curGraph]->unloadGraph();
-        delete(myGraphs[curGraph]);
-        delete(myMatrices[curGraph]);
+        cout << endl;
+        cout << "MATRIX FOR GRAPH #" << curGraphNum << ": " << endl;
+        myMatrix->printMatrix();
+
+        cout << endl;
+        cout << "ADJACENCY LIST FOR GRAPH #" << curGraphNum << ": " << endl;
+        printAdjacencyList(myGraph);
+
+        myGraph->unloadGraph();
+        delete(myMatrix);
+        delete(myGraph);
     }
-    myGraphs.clear();
-    myMatrices.clear();
 }
