@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Vertex.h"
+#include "Queue.h"
 
 using namespace std;
 
@@ -43,10 +44,58 @@ class Graph
             vertices[vertex2]->addNeighbor(vertices[vertex1]);
         }
 
-        // Gets the size of the vertices Array
-        int verticesSize()
+        // Does a Depth First Traversal of the graph
+        void DFS(Vertex* v)
         {
-            return vertices.size();
+            if (!v->processed)
+            {
+                cout << v->id << " ";
+                v->processed = true;
+            }
+
+            for (int i = 0, n = v->neighbors.size(); i < n; i++)
+            {
+                if (!v->neighbors[i]->processed)
+                {
+                    DFS(v->neighbors[i]);
+                }
+            }
+        }
+
+        // Does a Breadth First Traversal of the graph
+        void BFS(Vertex* vertex)
+        {
+            Vertex* currentVertex;
+            Vertex* currentNeighbor;
+
+            Queue* q = new Queue();
+            q->enqueue(vertex);
+            vertex->processed = true;
+
+            while (!q->isEmpty())
+            {
+                currentVertex = q->dequeue();
+                cout << currentVertex->id << " ";
+                for (int i = 0, n = currentVertex->neighbors.size(); i < n; i++)
+                {
+                    currentNeighbor = currentVertex->neighbors[i];
+
+                    if (!currentNeighbor->processed)
+                    {
+                        q->enqueue(currentNeighbor);
+                        currentNeighbor->processed = true;
+                    }   
+                }
+            }
+            delete(q);
+        }
+
+        void resetProcessed()
+        {
+            for (int i = 0, n = vertices.size(); i < n; i++)
+            {
+                vertices[i]->processed = false;
+            }
         }
 
         // Unloads each Vertex in the Graph
