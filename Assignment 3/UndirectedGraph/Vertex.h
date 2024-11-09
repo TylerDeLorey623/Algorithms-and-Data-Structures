@@ -14,6 +14,9 @@ class Vertex
         bool processed = false;
         vector<Vertex*> neighbors;
 
+        // Member used for BFS Queue
+        Vertex* next = nullptr;
+
         // Parameterized constructor for Vertex class
         Vertex(string ID)
         {
