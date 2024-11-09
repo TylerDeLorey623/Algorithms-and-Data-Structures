@@ -4,8 +4,6 @@
 #include <iostream>
 #include <vector>
 
-#include "Graph.h"
-
 using namespace std;
 
 class Matrix
@@ -13,15 +11,19 @@ class Matrix
     public:
         // Members of Matrix class
         vector<vector<int>> matrix;
-        int size;
-        Graph* graph;
+        vector<string> vertexIDs;
 
-        // Parameterized constructor for Matrix class
-        Matrix(int SIZE, Graph* GRAPH)
+        // Increment size of Matrix by 1 and add ID to vector
+        void incrementSize(string ID)
         {
-            this->size = SIZE;
-            matrix.resize(size, vector<int>(SIZE, 0));
-            this->graph = GRAPH;
+            vertexIDs.push_back(ID);
+            int size = vertexIDs.size();
+
+            this->matrix.resize(size);
+            for (int i = 0; i < size; i++)
+            {
+                this->matrix[i].resize(size, 0);
+            }
         }
 
         // Sets a value to 1
@@ -34,17 +36,20 @@ class Matrix
         // Prints Matrix
         void printMatrix()
         {
+            int size = vertexIDs.size();
+
             // Print first row
-            cout << "M ";
+            cout << "  ";
             for (int i = 0; i < size; i++)
             {
-                cout << string(graph->vertices[i]->id) << " ";
+                cout << vertexIDs[i] << " ";
             }
             cout << endl;
 
+            // Prints matrix information with vertex ID in first column
             for (int i = 0; i < size; i++)
             {
-                cout << string(graph->vertices[i]->id) << " ";
+                cout << vertexIDs[i] << " ";
                 for (int j = 0; j < size; j++)
                 {
                     cout << matrix[i][j] << " ";
