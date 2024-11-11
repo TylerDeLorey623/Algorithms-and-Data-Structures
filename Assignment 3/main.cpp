@@ -37,6 +37,10 @@ int main()
     float avg = 0;
     int itemCount = 0;
 
+    /*
+        BINARY SEARCH TREE IMPLEMENTATION
+     */
+
     // File IO
     string item;
     ifstream file;
@@ -90,6 +94,13 @@ int main()
     // Calculate average comparisons
     avg = avg / itemCount;
     outFile << endl << "Average Number of Comparisons for BST Search: " << fixed << setprecision(2) << avg << endl << endl;
+
+    // Unload BST
+    myTree.unloadTree();
+
+    /*
+        UNDIRECTED GRAPH IMPLEMENTATION
+     */
 
     // Open graph file
     file.open("./UndirectedGraph/graphs1.txt");
@@ -168,6 +179,7 @@ int main()
     printInformation(check, curGraphNum, myMatrix, myGraph);
 
     cout << "All output is in the output.txt file" << endl;
+    outFile.close();
 }
 
 void printInformation(bool needToPrint, int& graphNum, Matrix* matrix, Graph* graph)
