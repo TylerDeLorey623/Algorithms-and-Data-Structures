@@ -78,17 +78,6 @@ class BST
             inorderBST(root);
         }
 
-        // Does an inorder traversal of BST (Sorted Output)
-        void inorderBST(Node* curNode)
-        {
-            if (curNode != nullptr)
-            {
-                inorderBST(curNode->left);
-                outFile << curNode->data << endl;
-                inorderBST(curNode->right);
-            }
-        }
-
         // Searches for target item in BST
         int search(string target)
         {
@@ -131,6 +120,36 @@ class BST
 
             return comparisonNum;
         }
+
+        // Function program calls to unload BST
+        void unloadTree()
+        {
+            unload(root);
+        }
+
+    private:
+        // Deletes each Node of the BST
+        void unload(Node* curNode)
+        {
+            if (curNode != nullptr)
+            {
+                unload(curNode->left);
+                unload(curNode->right);
+                delete(curNode);
+            }
+        }
+
+        // Does an inorder traversal of BST (Sorted Output)
+        void inorderBST(Node* curNode)
+        {
+            if (curNode != nullptr)
+            {
+                inorderBST(curNode->left);
+                outFile << curNode->data << endl;
+                inorderBST(curNode->right);
+            }
+        }
+
 };
 
 #endif
