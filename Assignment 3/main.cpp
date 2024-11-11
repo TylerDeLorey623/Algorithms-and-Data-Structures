@@ -26,6 +26,7 @@ int main()
 
     // Used for File Input
     ifstream file;
+    string item;
     
     // BST Declaration
     BST myTree;
@@ -125,8 +126,6 @@ int main()
         BINARY SEARCH TREE IMPLEMENTATION
      */
 
-    // File IO
-    string item;
 
     // Open magicitems file
     file.open("./BinarySearchTree/magicitems.txt");
