@@ -11,7 +11,8 @@ TARGET = main
 SRCS = main.cpp
 
 # Header files
-HEADERS = BinarySearchTree/Node.h \
+HEADERS = GlobalOutput.h \
+		  BinarySearchTree/Node.h \
 		  BinarySearchTree/BST.h \
 		  BinarySearchTree/magicitems.txt \
 		  BinarySearchTree/magicitems-find-in-bst.txt \
@@ -43,4 +44,4 @@ run: $(TARGET)
 # Clean rule to remove generated files
 # Uses del if on windows, uses rm on Unix-like systems (and Git Bash)
 clean: 
-	rm -f main $(OBJS) || del main.exe $(OBJS) 
+	rm -f main $(OBJS) output.txt || del main.exe $(OBJS) output.txt
