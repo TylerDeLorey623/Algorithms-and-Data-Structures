@@ -4,6 +4,7 @@
 #include <sstream>
 #include <vector>
 
+#include "GlobalOutput.h"
 #include "./BinarySearchTree/BST.h"
 #include "./UndirectedGraph/Graph.h"
 #include "./UndirectedGraph/Matrix.h"
@@ -16,6 +17,13 @@ void printInformation(bool needToPrint, int& graphNum, Matrix* matrix, Graph* gr
 
 int main()
 {
+    // If output file isn't valid, end program
+    if (!outFile.is_open()) 
+    {
+        cerr << "Error opening file!" << endl;
+        return 1; 
+    }
+
     // BST Declaration
     BST myTree;
 
@@ -39,37 +47,40 @@ int main()
     file.open("./BinarySearchTree/magicitems.txt");
     if (!file.is_open())
     {
-        cout << "File failed to open." << endl;
+        cerr << "File failed to open." << endl;
         return 1;
     }
 
     // Read each line from file and insert it into the BST
+    outFile << "INSERTING INTO BST" << endl << endl;
     while (getline(file, item))
     {
-        //myTree.insert(item);
+        myTree.insert(item);
     }
 
     // Close magicitems file
     file.close();
 
     // Prints out entire BST with an in-order traversal
-    cout << endl << "INORDER TRAVERSAL OF BST:" << endl;
-    //myTree.inorderTrav();
+    outFile << endl << "INORDER TRAVERSAL OF BST:" << endl;
+    myTree.inorderTrav();
 
     // Opening another file
     file.open("./BinarySearchTree/magicitems-find-in-bst.txt");
     if (!file.is_open())
     {
-        cout << "File failed to open." << endl;
+        cerr << "File failed to open." << endl;
         return 1;
     }
+
+    outFile << endl;
 
     // Read each line from file and search for it in the BST
     while (getline(file, item))
     {
-        cout << "Comparisons to find \"" << item << "\": ";
+        outFile << "Comparisons to find \"" << item << "\": ";
         comparisonNum = myTree.search(item);
-        cout << "(" << comparisonNum << ")" << endl;
+        outFile << "(" << comparisonNum << ")" << endl;
         avg += comparisonNum;
         itemCount++;
     }
@@ -78,13 +89,13 @@ int main()
 
     // Calculate average comparisons
     avg = avg / itemCount;
-    cout << endl << "Average Number of Comparisons for BST Search: " << fixed << setprecision(2) << avg << endl << endl;
+    outFile << endl << "Average Number of Comparisons for BST Search: " << fixed << setprecision(2) << avg << endl << endl;
 
     // Open graph file
     file.open("./UndirectedGraph/graphs1.txt");
     if (!file.is_open())
     {
-        cout << "File failed to open." << endl;
+        cerr << "File failed to open." << endl;
         return 1;
     }
 
@@ -155,6 +166,8 @@ int main()
 
     // Prints information for the last Graph if it exists
     printInformation(check, curGraphNum, myMatrix, myGraph);
+
+    cout << "All output is in the output.txt file" << endl;
 }
 
 void printInformation(bool needToPrint, int& graphNum, Matrix* matrix, Graph* graph)
@@ -164,29 +177,29 @@ void printInformation(bool needToPrint, int& graphNum, Matrix* matrix, Graph* gr
         graphNum++;
 
         // Print Matrix
-        cout << endl;
-        cout << "MATRIX FOR GRAPH #" << graphNum << ": " << endl;
+        outFile << endl;
+        outFile << "MATRIX FOR GRAPH #" << graphNum << ": " << endl;
         matrix->printMatrix();
 
         // Print Adjacency List
-        cout << endl;
-        cout << "ADJACENCY LIST FOR GRAPH #" << graphNum << ": " << endl;
+        outFile << endl;
+        outFile << "ADJACENCY LIST FOR GRAPH #" << graphNum << ": " << endl;
         printAdjacencyList(graph);
 
         // Depth first traversal starting from first Vertex
-        cout << endl;
-        cout << "DEPTH-FIRST TRAVERSAL FOR GRAPH #" << graphNum << ": " << endl;
+        outFile << endl;
+        outFile << "DEPTH-FIRST TRAVERSAL FOR GRAPH #" << graphNum << ": " << endl;
         graph->DFS(graph->vertices[0]);
 
         // Reset processed values
         graph->resetProcessed();
 
         // Breadth first traversal starting from first Vertex
-        cout << endl;
-        cout << "BREADTH-FIRST TRAVERSAL FOR GRAPH #" << graphNum << ": " << endl;
+        outFile << endl;
+        outFile << "BREADTH-FIRST TRAVERSAL FOR GRAPH #" << graphNum << ": " << endl;
         graph->BFS(graph->vertices[0]);
 
-        cout << endl;
+        outFile << endl;
 
         graph->unloadGraph();
         delete(matrix);

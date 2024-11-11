@@ -22,7 +22,7 @@ class BST
             Node *curNode = nullptr;
             bool lessThan = false;
 
-            cout << item << ": ";
+            outFile << item << ": ";
             
             // Traverses BST to find correct insertion position
             curNode = root;
@@ -34,20 +34,20 @@ class BST
 
                 if (curNode != root)
                 {
-                    cout << ", ";
+                    outFile << ", ";
                 }
 
                 // If item belongs to the left subtree of the current Node, traverse through that subtree
                 if (item < curNode->data)
                 {
-                    cout << "L";
+                    outFile << "L";
                     lessThan = true;
                     curNode = curNode->left;
                 }
                 // If item belongs to the right subtree of the current Node, traverse through that subtree
                 else
                 {
-                    cout << "R";
+                    outFile << "R";
                     lessThan = false;
                     curNode = curNode->right;
                 }
@@ -69,7 +69,7 @@ class BST
                 prev->right = newNode;
             }
 
-            cout << endl;
+            outFile << endl;
         }
 
         // Function that programmers calls in main, traversal starts at the root Node
@@ -84,7 +84,7 @@ class BST
             if (curNode != nullptr)
             {
                 inorderBST(curNode->left);
-                cout << curNode->data << endl;
+                outFile << curNode->data << endl;
                 inorderBST(curNode->right);
             }
         }
@@ -106,19 +106,19 @@ class BST
                 // If target matches current Node data, it has been found
                 if (target == currentData)
                 {
-                    cout << "FOUND ";
+                    outFile << "FOUND ";
                     break;
                 }
                 // If target is smaller than current Node data, traverse left subtree
                 else if (target < currentData)
                 {
-                    cout << "L ";
+                    outFile << "L ";
                     curNode = curNode->left;
                 }
                 // If target is greater than current Node data, traverse right subtree
                 else
                 {
-                    cout << "R ";
+                    outFile << "R ";
                     curNode = curNode->right;
                 }
             }
@@ -126,7 +126,7 @@ class BST
             // If loop finishes and the current Node is NULL, means data has not been found
             if (curNode == NULL)
             {
-                cout << "NOT_FOUND ";
+                outFile << "NOT_FOUND ";
             }
 
             return comparisonNum;

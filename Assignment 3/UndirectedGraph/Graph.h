@@ -49,7 +49,7 @@ class Graph
         {
             if (!v->processed)
             {
-                cout << v->id << " ";
+                outFile << v->id << " ";
                 v->processed = true;
             }
 
@@ -75,7 +75,7 @@ class Graph
             while (!q->isEmpty())
             {
                 currentVertex = q->dequeue();
-                cout << currentVertex->id << " ";
+                outFile << currentVertex->id << " ";
                 for (int i = 0, n = currentVertex->neighbors.size(); i < n; i++)
                 {
                     currentNeighbor = currentVertex->neighbors[i];

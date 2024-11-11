@@ -25,16 +25,16 @@ void printAdjacencyList(Graph* currentGraph)
         neighborSize = currentVertex->neighbors.size();
 
         // Prints the ID of each Vertex
-        cout << "[" << currentVertex->id << "] ";
+        outFile << "[" << currentVertex->id << "] ";
         
         // Prints the neighbors of each Vertex
         for (int neighborIndex = 0; neighborIndex < neighborSize; neighborIndex++)
         {
             currentNeighborID = currentVertex->neighbors[neighborIndex]->id;
-            cout << currentNeighborID << " ";
+            outFile << currentNeighborID << " ";
         }
 
-        cout << endl;
+        outFile << endl;
     }
 }
 

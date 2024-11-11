@@ -39,22 +39,26 @@ class Matrix
             int size = vertexIDs.size();
 
             // Print first row
-            cout << "  ";
+            outFile << "  ";
             for (int i = 0; i < size; i++)
             {
-                cout << vertexIDs[i] << " ";
+                outFile << vertexIDs[i] << " ";
             }
-            cout << endl;
+            outFile << endl;
 
             // Prints matrix information with vertex ID in first column
             for (int i = 0; i < size; i++)
             {
-                cout << vertexIDs[i] << " ";
+                outFile << vertexIDs[i] << " ";
                 for (int j = 0; j < size; j++)
                 {
-                    cout << matrix[i][j] << " ";
+                    if (vertexIDs[j].size() > 1)
+                    {
+                        outFile << " ";
+                    }
+                    outFile << matrix[i][j] << " ";
                 }
-                cout << endl;
+                outFile << endl;
             }
         }
 };
