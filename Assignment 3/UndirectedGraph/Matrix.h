@@ -36,23 +36,30 @@ class Matrix
         // Prints Matrix
         void printMatrix()
         {
+            bool displayIDs = true;
             int size = vertexIDs.size();
 
-            // Print first row
-            outFile << "  ";
-            for (int i = 0; i < size; i++)
+            // Print first row of IDs
+            if (displayIDs)
             {
-                outFile << vertexIDs[i] << " ";
+                outFile << "  ";
+                for (int i = 0; i < size; i++)
+                {
+                    outFile << vertexIDs[i] << " ";
+                }
+                outFile << endl;
             }
-            outFile << endl;
 
             // Prints matrix information with vertex ID in first column
             for (int i = 0; i < size; i++)
             {
-                outFile << vertexIDs[i] << " ";
+                if (displayIDs)
+                {
+                    outFile << vertexIDs[i] << " ";
+                }
                 for (int j = 0; j < size; j++)
                 {
-                    if (vertexIDs[j].size() > 1)
+                    if ((displayIDs) && (vertexIDs[j].size() > 1))
                     {
                         outFile << " ";
                     }
