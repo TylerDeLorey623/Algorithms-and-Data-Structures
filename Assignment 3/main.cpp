@@ -202,7 +202,8 @@ void printInformation(bool needToPrint, int& graphNum, Matrix* matrix, Graph* gr
         // Depth first traversal starting from first Vertex
         outFile << endl;
         outFile << "DEPTH-FIRST TRAVERSAL FOR GRAPH #" << graphNum << ": " << endl;
-        graph->DFS(graph->vertices[0]);
+        graph->depthFirstTrav();
+        graph->checkDFT();
 
         // Reset processed values
         graph->resetProcessed();
@@ -210,7 +211,8 @@ void printInformation(bool needToPrint, int& graphNum, Matrix* matrix, Graph* gr
         // Breadth first traversal starting from first Vertex
         outFile << endl;
         outFile << "BREADTH-FIRST TRAVERSAL FOR GRAPH #" << graphNum << ": " << endl;
-        graph->BFS(graph->vertices[0]);
+        graph->breadthFirstTrav();
+        graph->checkBFT();
 
         outFile << endl;
 
