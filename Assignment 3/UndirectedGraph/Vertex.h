@@ -4,8 +4,6 @@
 #include <iostream>
 #include <vector>
 
-#include "Graph.h"
-
 class Vertex
 {
     public:
