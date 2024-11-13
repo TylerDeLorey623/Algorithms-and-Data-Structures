@@ -6,7 +6,7 @@
 
 using namespace std;
 
-// Public Queue class for Breadth First Search
+// Public Queue class for Breadth First Traversal
 class Queue 
 {
     public:
