@@ -10,7 +10,7 @@ class Matrix
 {
     public:
         // Members of Matrix class
-        vector<vector<int>> matrix;
+        vector< vector<int> > matrix;
         vector<string> vertexIDs;
 
         // Increment size of Matrix by 1 and add ID to vector
