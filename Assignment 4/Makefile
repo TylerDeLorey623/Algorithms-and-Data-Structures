@@ -17,7 +17,9 @@ HEADERS = spice.txt \
 		  Sort.h \
 		  Greed.h \
 		  Vertex.h \
-		  Graph.h
+		  Graph.h \
+		  SSSP.h \
+		  Stack.h
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
