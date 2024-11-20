@@ -7,8 +7,12 @@
 #include "Sort.h"
 #include "Greed.h"
 #include "Graph.h"
+#include "SSSP.h"
 
 using namespace std;
+
+// Prototype for upcoming function
+void printInformation(bool &print, Graph* graph, int curNum);
 
 int main()
 {
@@ -19,6 +23,7 @@ int main()
     // For Graph class and Output
     Graph* myGraph;
     bool check = false;
+    int graphNum = 0;
 
     // Indices for each word in the line
     int commandIndex = 0, typeIndex = 1, vertexIndex = 2, v1Index = 2, v2Index = 4, weightIndex = 5;
@@ -37,8 +42,6 @@ int main()
         istringstream stream(line);
         string word;
         vector<string> words;
-
-        int vertex1Index, vertex2Index;
 
         // Split each word of each line in the file
         while (stream >> word)
@@ -65,13 +68,8 @@ int main()
             if ((words[commandIndex] == "new") && (words[typeIndex] == "graph"))
             {
                 // Run SSSP and outputs results
-                /* ENTER SSSP FUNCTION CALL HERE */
-                if (check)
-                {
-                    myGraph->unloadGraph();
-                    delete(myGraph);
-                }
-                check = true;
+                printInformation(check, myGraph, graphNum);
+                graphNum++;
                 
                 myGraph = new Graph();
             }
@@ -86,23 +84,14 @@ int main()
                 // If command was "add edge", add an edge to current Graph that connects the two Vertices
                 else if (words[typeIndex] == "edge")
                 {
-                    // Gets the index of these Vertices in the vertices array
-                    vertex1Index = myGraph->findVertexIndex(words[v1Index]);
-                    vertex2Index = myGraph->findVertexIndex(words[v2Index]);
-
-                    // Adds a directed edge with weight linking Vertex 1 to Vertex 2 using those indices
-                    myGraph->addEdge(vertex1Index, vertex2Index, stoi(words[weightIndex]));
+                    // Adds a directed edge with weight linking Vertex 1 to Vertex 2
+                    myGraph->addEdge(words[v1Index], words[v2Index], stoi(words[weightIndex]));
                 }
             }
         }
     }
 
-    if (check)
-    {
-        myGraph->unloadGraph();
-        delete(myGraph);
-    }
-
+    printInformation(check, myGraph, graphNum);
     file.close();
 
     // Spices Vector
@@ -189,4 +178,22 @@ int main()
     }
 
     file.close();
+}
+
+// Prints information for SSSP algorithm
+void printInformation(bool &print, Graph* graph, int curNum)
+{
+    if (print)
+    {
+        // Do the bellman ford algorithm, make sure it worked 
+        bellmanFord(graph, graph->vertices[0], curNum);
+        cout << endl;
+        
+        graph->unloadGraph();
+        delete(graph);
+    }
+    else
+    {
+        print = true;
+    }
 }
