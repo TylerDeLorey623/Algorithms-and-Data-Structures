@@ -3,29 +3,27 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
 class Vertex
 {
     public:
-        // Members of Vertex class
+        // Member of Vertex class
         string id;
-        bool processed = false;
-        vector<Vertex*> neighbors;
-        vector<int> weights;
+        float distance;
+        Vertex* predecessor;
+
+        // Used for Stack to print SSSP results
+        Vertex* next = nullptr;
 
         // Parameterized constructor for Vertex class
         Vertex(string ID)
         {
             this->id = ID;
-        }
-
-        // Connects a Vertex to this Vertex (adding an Edge) and a weight for that Edge
-        void addNeighbor(Vertex* addedVertex, int weight)
-        {
-            neighbors.push_back(addedVertex);
-            weights.push_back(weight);
+            this->distance = INFINITY;
+            this->predecessor = nullptr;
         }
 };
 
