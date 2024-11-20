@@ -12,9 +12,12 @@ SRCS = main.cpp
 
 # Header files
 HEADERS = spice.txt \
+		  graphs2.txt \
           Spice.h \
 		  Sort.h \
-		  Greed.h
+		  Greed.h \
+		  Vertex.h \
+		  Graph.h
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
