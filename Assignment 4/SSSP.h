@@ -85,6 +85,7 @@ void SSSPresults(Graph* graph, Vertex* source)
 {
     Stack myStack;
     int totalWeight;
+    string space;
 
     Vertex* dest;
     Vertex* curVertex;
@@ -109,8 +110,15 @@ void SSSPresults(Graph* graph, Vertex* source)
                 curVertex = curVertex->predecessor;
             }
 
+            // For lining up spaces for all results
+            space = " ";
+            if (totalWeight < 0)
+            {
+                space = "";
+            }
+
             // Prints results of SSSP and the total cost
-            cout << source->id << " --> " << dest->id << " cost is " << totalWeight << "; path: " << source->id;
+            cout << source->id << " --> " << dest->id << " cost is " << space << totalWeight << "; path: " << source->id;
             while (!myStack.isEmpty())
             {
                 poppedVertex = myStack.pop();
