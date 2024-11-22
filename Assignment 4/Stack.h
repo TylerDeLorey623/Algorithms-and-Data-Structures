@@ -2,7 +2,6 @@
 #define STACK_H
 
 #include <iostream>
-#include "Vertex.h"
 
 using namespace std;
 

@@ -3,7 +3,6 @@
 #include <iomanip>
 #include <vector>
 
-#include "Spice.h"
 #include "Sort.h"
 #include "Greed.h"
 #include "Graph.h"

@@ -5,8 +5,6 @@
 #include <vector>
 #include <climits>
 
-#include "Spice.h"
-
 using namespace std;
 
 // Determines if fKnapsack output should say "scoops" or "scoop" depending on the quantity
