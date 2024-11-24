@@ -11,7 +11,7 @@
 using namespace std;
 
 // Prototype for upcoming function
-void printInformation(bool &print, Graph* graph, int curNum);
+void processGraph(bool &print, Graph* graph, int curNum);
 
 int main()
 {
@@ -19,13 +19,17 @@ int main()
     ifstream file;
     string line;
 
+    /**
+     * DYNAMIC PROGRAMMING SECTION
+     */
+
     // For Graph class and Output
     Graph* myGraph;
     bool check = false;
     int graphNum = 0;
 
     // Indices for each word in the line
-    int commandIndex = 0, typeIndex = 1, vertexIndex = 2, v1Index = 2, v2Index = 4, weightIndex = 5;
+    const int commandIndex = 0, typeIndex = 1, vertexIndex = 2, v1Index = 2, v2Index = 4, weightIndex = 5;
 
     // Open Graphs file
     file.open("graphs2.txt");
@@ -67,7 +71,7 @@ int main()
             if ((words[commandIndex] == "new") && (words[typeIndex] == "graph"))
             {
                 // Run SSSP and outputs results
-                printInformation(check, myGraph, graphNum);
+                processGraph(check, myGraph, graphNum);
                 graphNum++;
                 
                 myGraph = new Graph();
@@ -90,16 +94,19 @@ int main()
         }
     }
 
-    printInformation(check, myGraph, graphNum);
+    processGraph(check, myGraph, graphNum);
     file.close();
+
+    /**
+     * GREEDY ALGORITHM SECTION
+     */
 
     // Spices Vector
     vector<Spice*> mySpices;
     bool sortSpices = false;
 
     // Indices for each word in the line
-    commandIndex = 0; 
-    int nameIndex = 3, priceIndex = 6, qtyIndex = 9, capacityIndex = 3;
+    const int nameIndex = 3, priceIndex = 6, qtyIndex = 9, capacityIndex = 3;
 
     // Open spice file
     file.open("spice.txt");
@@ -180,7 +187,7 @@ int main()
 }
 
 // Prints information for SSSP algorithm
-void printInformation(bool &print, Graph* graph, int curNum)
+void processGraph(bool &print, Graph* graph, int curNum)
 {
     if (print)
     {
