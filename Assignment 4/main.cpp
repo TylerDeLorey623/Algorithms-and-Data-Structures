@@ -164,7 +164,7 @@ int main()
             }
             else if (words[commandIndex] == "knapsack")
             {
-                // Sort spices vector by unit price
+                // Sort spices vector by unit price in descending order
                 if (!sortSpices)
                 {
                     sort(mySpices);
